@@ -16,7 +16,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@mui/x-date-pickers": "^7.22.1",
-    "@reduxjs/toolkit": "^2.3.0",
+    "@reduxjs/toolkit": "^2.5.0",
     "@tawk.to/tawk-messenger-react": "^2.0.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
