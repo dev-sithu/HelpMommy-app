@@ -8,6 +8,7 @@ Tech Stack:
 - Frontend
   - React
   - Redux
+  - MUI
   - Sass
   - Cordova
 - Backend
@@ -30,6 +31,6 @@ For production build, run `npm run build`
 
     cordova run browser
 
-or 
+or
 
     cordova run android
