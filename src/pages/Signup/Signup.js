@@ -75,6 +75,11 @@ const Signup = () => {
                     </FormControl>
                 </div>
                 <div className="form-control">
+                    <Error field={errors.email} />
+                    <TextField {...register("email", {required: "Enter an email address."})}
+                               id="outlined-email" label="Email Address" variant="outlined" required fullWidth autoComplete="off" />
+                </div>
+                <div className="form-control">
                     <Button onClick={handleSubmit(onSubmit)} disabled={loading}
                         className="margin-button" variant="contained" size="large" fullWidth={true}>
                         <span className="my">အကောင့်ပြုလုပ်ရန်</span>
