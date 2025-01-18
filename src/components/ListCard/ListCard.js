@@ -5,12 +5,15 @@ import useLongPress from "../../hooks/useLongPress";
 import moment from "moment";
 import "./ListCard.scss";
 import {toast} from "react-toastify";
-import config from "../../config";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteUserJob, hideDeleteIcon, showDeleteIcon} from "../../state/user/jobCardSlice";
 import {useEffect, useState} from "react";
+import {getConfig} from "../../helpers/common";
+import {getItemDecrypted} from "../../helpers/storage";
 
 const ListCard = props => {
+    const config = getConfig();
+    const user = getItemDecrypted(config.userStoreKey);
     const {title, hearts, index} = props;
     const [jobs, setJobs] = useState([]);
     const deleteIcon = useSelector(state => state.jobCard.deleteIcon);
@@ -38,7 +41,7 @@ const ListCard = props => {
     }, [props]);
 
     const doDelete = async id => {
-        dispatch(deleteUserJob(id)).then(response => {
+        dispatch(deleteUserJob({ id, userId: user.id })).then(response => {
             const { result, error } = response.payload;
 
             if (error) {

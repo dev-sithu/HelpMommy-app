@@ -8,7 +8,7 @@ const initialState = {
 
 export const deleteUserJob = createAsyncThunk(
     "user/deleteUserJob",
-    async id => await api(`user_jobs/${id}`, "POST")
+    async ({id, userId}) => await api(`/users/${userId}/jobs/${id}`, "POST")
 );
 
 const jobCardSlice = createSlice({
