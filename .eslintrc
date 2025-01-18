@@ -27,6 +27,7 @@
   },
   "rules": {
     "no-var": "error",
+    "no-unused-vars": "warn",
     "semi": "error",
     "space-infix-ops": "error",
     "quotes": "warn",
