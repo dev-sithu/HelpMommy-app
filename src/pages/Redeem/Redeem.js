@@ -11,6 +11,7 @@ import {checkRedeem, getConfig} from "../../helpers/common";
 import {getItemDecrypted, storeItemEncrypted} from "../../helpers/storage";
 import {useDispatch, useSelector} from "react-redux";
 import {redeem} from "../../state/user/redeemSlice";
+import {useAccountData} from "../../hooks/useAccountData";
 
 const Redeem = () => {
     const config = getConfig();
@@ -25,6 +26,8 @@ const Redeem = () => {
         formState: {errors},
         handleSubmit
     } = useForm();
+
+    useAccountData();
 
     const tawkCustomStyle = {
         visibility: {

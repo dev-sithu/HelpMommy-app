@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {api} from "../../helpers/api";
-import {storeItemEncrypted} from "../../helpers/storage";
+import {storeItem, storeItemEncrypted} from "../../helpers/storage";
 import config from "../../config";
 
 const initialState = {
@@ -28,6 +28,9 @@ const userSlice = createSlice({
 
                 if (result && result.data.id) {
                     storeItemEncrypted(config.userStoreKey, result.data);
+                    storeItem(`${config.storePrefix}token`, result.meta.token);
+                    storeItem(`${config.storePrefix}key`, result.meta.key);
+                    console.log(result.meta);
                 }
             })
             .addCase(userLogin.rejected, state => {
@@ -81,9 +84,33 @@ const userSlice = createSlice({
                 state.loading = false;
                 console.log("userAccount.rejected");
             })
+            // Refresh Token
+            .addCase(userRefreshToken.pending, state => {
+                state.loading = true;
+            })
+            .addCase(userRefreshToken.fulfilled, (state, action) => {
+                const { result } = action.payload;
+                state.loading = false;
+
+                if (result && result.data.id) {
+                    storeItemEncrypted(config.userStoreKey, result.data);
+                    storeItem(`${config.storePrefix}token`, result.meta.token);
+                    storeItem(`${config.storePrefix}key`, result.meta.key);
+                    console.log(result.meta);
+                }
+            })
+            .addCase(userRefreshToken.rejected, state => {
+                state.loading = false;
+                console.log("userLogin.rejected");
+            })
         ;
     }
 });
+
+export const userRefreshToken = createAsyncThunk(
+    "user/token/refresh",
+    async () => await api("auth/token/refresh", "POST")
+);
 
 export const userLogin = createAsyncThunk(
     "user/login",

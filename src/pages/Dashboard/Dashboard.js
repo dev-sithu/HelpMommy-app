@@ -15,8 +15,8 @@ import {getConfig} from "../../helpers/common";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchUserTodayJobs} from "../../state/user/userJobsSlice";
-import {userAccount} from "../../state/user/userSlice";
 import {fetchUserRatings} from "../../state/user/userRatingsSlice";
+import {useAccountData} from "../../hooks/useAccountData";
 
 const Dashboard = () => {
     const config = getConfig();
@@ -26,10 +26,13 @@ const Dashboard = () => {
     const { totalHearts, todayHearts, amount, loading: loadingRatings } = useSelector(state => state.userRatings);
     const dispatch = useDispatch();
 
+    useAccountData();
+
     useEffect(() => {
-        dispatch(userAccount(user.account_id));
-        dispatch(fetchUserTodayJobs(user.id));
-        dispatch(fetchUserRatings(user.id));
+        if (user) {
+            dispatch(fetchUserTodayJobs(user.id));
+            dispatch(fetchUserRatings(user.id));
+        }
     }, []);
 
     const isLoading = loadingUser || loadingJobs || loadingRatings;

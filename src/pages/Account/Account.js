@@ -5,7 +5,7 @@ import {Alert, Button, IconButton, InputAdornment, InputLabel, OutlinedInput, Te
 import {useForm} from "react-hook-form";
 import FormControl from "@mui/material/FormControl";
 import {Lock, Visibility, VisibilityOff} from "@mui/icons-material";
-import {getItemDecrypted, removeItem} from "../../helpers/storage";
+import {getItemDecrypted} from "../../helpers/storage";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import {getConfig} from "../../helpers/common";
@@ -13,6 +13,7 @@ import Loading from "../../components/Loading";
 import TrialWarning from "../../components/TrialWarning";
 import {useDispatch, useSelector} from "react-redux";
 import {togglePassword, userUpdate} from "../../state/user/userSlice";
+import {useAccountData, useClearAccountData} from "../../hooks/useAccountData";
 
 // eslint-disable-next-line
 const Account = () => {
@@ -28,6 +29,8 @@ const Account = () => {
         formState: {errors},
         handleSubmit
     } = useForm();
+
+    useAccountData();
 
     const handleClickShowPassword = () => dispatch(togglePassword(!visiblePassword));
 
@@ -47,7 +50,7 @@ const Account = () => {
     };
 
     const logout = () => {
-        removeItem(config.userStoreKey);
+        useClearAccountData();
         navigate("/login");
     };
 

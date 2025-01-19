@@ -18,6 +18,7 @@ import {changeJobAutocompleteKey, fetchJobs, saveJob, setJobDate} from "../../st
 import {getConfig} from "../../helpers/common";
 import {getItemDecrypted} from "../../helpers/storage";
 import {toast} from "react-toastify";
+import {useAccountData} from "../../hooks/useAccountData";
 
 const Add = () => {
     const config = getConfig();
@@ -32,6 +33,8 @@ const Add = () => {
         handleSubmit
     } = useForm();
     const today = dayjs();
+
+    useAccountData();
 
     useEffect(() => {
         dispatch(fetchJobs());

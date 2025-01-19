@@ -42,3 +42,13 @@ export const checkRedeem = user => {
 };
 
 export const uniqueId = () => "id" + Math.random().toString(16).slice(2);
+
+export const isJsonString = str => {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+
+    return true;
+};

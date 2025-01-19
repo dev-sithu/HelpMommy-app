@@ -1,6 +1,7 @@
 import axios from "axios";
 import {toast} from "react-toastify";
 import config from "../config";
+import {getItem} from "./storage";
 
 export const httpRequest = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
@@ -19,11 +20,20 @@ export const api = async (url, method = "get", postData = {}, callbacks = {}) =>
     let error;
 
     try {
-        const res = await httpRequest.request({ method, url, data: postData });
+        const res = await httpRequest.request({
+            method,
+            url,
+            data: postData,
+            headers: {
+                "X-User-Key": getItem(`${config.storePrefix}key`),
+                "Authorization": getItem(`${config.storePrefix}token`),
+            }
+        });
+
         result = res.data;
     } catch (err) {
         if (err.response?.status === 400) {
-            // Handle 400
+            // Handle validation error
             console.log(err.response.data);
             error = err.response.data.error;
         } else {
@@ -35,7 +45,9 @@ export const api = async (url, method = "get", postData = {}, callbacks = {}) =>
                 msg += ` Error: ${err.message}`;
             }
 
-            toast.error(msg, config.toastOptions);
+            if (err.response?.status !== 403) {
+                toast.error(msg, config.toastOptions);
+            }
         }
     }
 

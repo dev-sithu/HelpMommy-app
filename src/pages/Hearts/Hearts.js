@@ -11,6 +11,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchUserJobs} from "../../state/user/userJobsSlice";
 import {fetchUserRatings} from "../../state/user/userRatingsSlice";
+import {useAccountData} from "../../hooks/useAccountData";
 
 const Hearts = () => {
     const config = getConfig();
@@ -19,9 +20,13 @@ const Hearts = () => {
     const { ratings, totalHearts, amount } = useSelector(state => state.userRatings);
     const dispatch = useDispatch();
 
+    useAccountData();
+
     useEffect(() => {
-        dispatch(fetchUserRatings(user.id));
-        dispatch(fetchUserJobs(user.id));
+        if (user) {
+            dispatch(fetchUserRatings(user.id));
+            dispatch(fetchUserJobs(user.id));
+        }
     }, []);
 
     return (

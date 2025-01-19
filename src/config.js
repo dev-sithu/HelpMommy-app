@@ -1,6 +1,7 @@
 const config = {
-    "userStoreKey": "user",
-    "settingStoreKey": "config",
+    "storePrefix": "hm_",
+    "userStoreKey": "hm_user",
+    "settingStoreKey": "hm_config",
     "toastOptions": {
         position: "top-center",
         theme: "dark",

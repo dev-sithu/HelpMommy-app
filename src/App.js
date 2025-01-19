@@ -1,4 +1,3 @@
-import "./App.scss";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
@@ -12,6 +11,7 @@ import Hearts from "./pages/Hearts/Hearts";
 import Account from "./pages/Account/Account";
 import Redeem from "./pages/Redeem/Redeem";
 import Layout from "./components/Layout";
+import "./App.scss";
 
 const App = () => (
     <BrowserRouter>

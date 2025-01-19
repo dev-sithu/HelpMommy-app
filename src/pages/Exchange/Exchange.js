@@ -15,6 +15,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchUserRatings} from "../../state/user/userRatingsSlice";
 import {exchange, setBalanceAmount, setBalanceHearts} from "../../state/user/exchangeSlice";
 import {exchangeAmount} from "../../state/store";
+import {useAccountData} from "../../hooks/useAccountData";
 
 // eslint-disable-next-line
 const Exchange = () => {
@@ -31,6 +32,8 @@ const Exchange = () => {
         handleSubmit,
         reset
     } = useForm();
+
+    useAccountData();
 
     useEffect(() => {
         if (user) {

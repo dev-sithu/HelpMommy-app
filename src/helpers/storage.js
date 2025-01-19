@@ -1,13 +1,21 @@
-import {CryptoJsAesDecrypt, CryptoJsAesEncrypt, decode2json} from "./common";
+import {CryptoJsAesDecrypt, CryptoJsAesEncrypt, decode2json, isJsonString} from "./common";
 
 export const storeItem = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (typeof value === "object") {
+        localStorage.setItem(key, JSON.stringify(value));
+    } else {
+        localStorage.setItem(key, value);
+    }
 };
 
 export const getItem = key => {
     const value = localStorage.getItem(key);
 
-    return value ? JSON.parse(value) : null;
+    if (value) {
+        return isJsonString(value) ? JSON.parse(value) : value;
+    }
+
+    return null;
 };
 
 export const removeItem = key => {
