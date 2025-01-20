@@ -6,12 +6,6 @@ import config from "../config";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
-export const useLogout = () => {
-    const navigate = useNavigate();
-    useClearAccountData();
-    navigate("/login");
-};
-
 export const useClearAccountData = () => {
     removeItem(config.userStoreKey);
     removeItem(`${config.storePrefix}key`);
@@ -21,6 +15,7 @@ export const useClearAccountData = () => {
 export const useAccountData = () => {
     const user = getItemDecrypted(config.userStoreKey);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("Layout useEffect - Start");
@@ -36,7 +31,8 @@ export const useAccountData = () => {
                     console.log(error.status);
                     if (error.status === 401) {
                         console.log("auth failed");
-                        useLogout();
+                        useClearAccountData();
+                        navigate("/login");
                     } else if (error.status === 403 && getItem(`${config.storePrefix}key`)) {
                         console.log("trying refresh token");
                         // try to re-authenticate
@@ -44,7 +40,8 @@ export const useAccountData = () => {
                         const {error: err} = res.payload;
                         if (err) {
                             console.log("refresh token failed");
-                            useLogout();
+                            useClearAccountData();
+                            navigate("/login");
                         }
                     }
                 }
