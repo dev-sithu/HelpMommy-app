@@ -20,7 +20,7 @@
     "@tawk.to/tawk-messenger-react": "^2.0.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.5.2",
+    "@testing-library/user-event": "^14.6.1",
     "axios": "^1.7.9",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.13",
