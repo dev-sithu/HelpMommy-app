@@ -68,7 +68,7 @@
     "plugins": {}
   },
   "devDependencies": {
-    "cordova-android": "^13.0.0",
+    "cordova-android": "^14.0.1",
     "cordova-browser": "^7.0.0"
   },
   "overrides": {
