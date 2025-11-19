@@ -33,14 +33,14 @@ const Home = () => {
                 startIcon={<LoginIcon/>}>
                 <span className="my">အကောင့်ဝင်ရန်</span>
             </Button>
-            <Button fullWidth
+            {/* <Button fullWidth
                 variant="outlined"
                 size="large"
                 className="margin-button my"
                 component={Link} to="/signup"
                 startIcon={<HowToRegIcon/>}>
                 <span className="my">အကောင့်အသစ်ဖွင့်ရန်</span>
-            </Button>
+            </Button> */}
         </div>
     );
 };
