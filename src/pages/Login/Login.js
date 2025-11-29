@@ -78,9 +78,9 @@ const Login = () => {
                         <span className="my">အကောင့်ဝင်ရန်</span>
                     </Button>
                 </div>
-                <div className="text-center">
-                    <Link to="/signup" className="my">အကောင့်မရှိသေးရင် အကောင့်အသစ်ဖွင့်ရန်</Link>
-                </div>
+                {/*<div className="text-center">*/}
+                {/*    <Link to="/signup" className="my">အကောင့်မရှိသေးရင် အကောင့်အသစ်ဖွင့်ရန်</Link>*/}
+                {/*</div>*/}
             </div>
         </>
     );
